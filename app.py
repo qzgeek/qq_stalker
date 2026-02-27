@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from 数据库 import 插入消息数据, 更新消息文件url
 from 匹配查询 import 解析命令并查询, ai驱动查询
 from 文件上传 import 检查文件大小, alist_offline_download
-from 配置 import 每分钟最大查询次数, 单条合并消息上限, 单次查询最大合并数, 消息发送延迟范围, 分片发送延迟范围, 定时发送时间, 监听地址, 监听端口, Token, 文件最大上传体积, 控制台打印事件, 超级用户列表, 功能开关, 查询关键词组
+from 配置 import 每分钟最大查询次数, 单条合并消息上限, 单次查询最大合并数, 消息发送延迟范围, 分片发送延迟范围, 定时发送时间, 监听地址, 监听端口, Token, 文件最大上传体积, 控制台打印事件, 超级用户列表, 功能开关, 查询关键词组, 一言主接口, 一言备用接口
 from 系统状态 import 获取运行状态
 import 消息发送
 
@@ -147,8 +147,8 @@ async def 监听发送成功事件(事件: dict):
     print(f"✅ [事件确认] 群 {群号} 合并消息发送成功 | 消息ID: {消息ID}")
 
 async def 获取一言():
-    主接口 = "https://api.zitat.cn/"
-    备用接口 = "https://v1.hitokoto.cn/"
+    主接口 = 一言主接口
+    备用接口 = 一言备用接口
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(主接口, timeout=10) as resp:
